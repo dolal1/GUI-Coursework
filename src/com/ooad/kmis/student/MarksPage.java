@@ -90,7 +90,6 @@ public class MarksPage extends JPanel {
 			rs.next();
 			scienceMarks = scienceMarks.fromResultSet(rs);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
