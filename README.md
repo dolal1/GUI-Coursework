@@ -1,4 +1,4 @@
-# GUI-Coursework
+# GUI_Coursework
 
 Role
 Tonny - Database
