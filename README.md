@@ -6,4 +6,4 @@ Tonny Bawembye - Database
 
 Vien Trevor Okoth - Login
 
-Ntwali Raymond -
+Ntwali Raymond - Teacher page and dashboard
