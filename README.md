@@ -1,5 +1,6 @@
 # GUI_Coursework
 
 Role
-Tonny - Database
-Vien - Login
+Tonny Bawembye - Database
+Vien Trevor Okoth - Login
+Ntwali Raymond - 
