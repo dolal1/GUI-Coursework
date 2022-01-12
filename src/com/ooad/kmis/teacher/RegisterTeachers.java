@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.ooad.kmis.GUtilities;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -62,8 +65,8 @@ public class RegisterTeachers extends JFrame {
 	PreparedStatement pst;
 	public void Connect() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+			Class.forName(GUtilities.driver);
+			con = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 		} catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(RegisterTeachers.this, "Failed to located Class");
 		} catch (SQLException e) {
@@ -137,7 +140,7 @@ public class RegisterTeachers extends JFrame {
 
 
 //                try {
-//                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+//                    Connection connection = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 //
 //                    String query = "INSERT INTO teachers (first_name, last_name, subject, user_name, password) VALUES ('" + firstName + "','" + lastName + "', '" + subjectsTaught + "', '" + userName + "', '" + password + "')";
 ////                    String query1 = "INSERT INTO teachers values('" + firstName + "','" + lastName + "','" + userName + "','" +

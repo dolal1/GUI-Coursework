@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.ooad.kmis.GUtilities;
 import com.ooad.kmis.Subjects;
 
 import javax.swing.JLabel;
@@ -65,8 +66,8 @@ public class EditMarks extends JFrame {
 	String lastName = "";
 	public void Connect() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+			Class.forName(GUtilities.driver);
+			con = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 		} catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(EditMarks.this, "Failed to located Class");
 		} catch (SQLException e) {

@@ -14,6 +14,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
+import com.ooad.kmis.GUtilities;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -61,8 +62,8 @@ public class RegisterStudents extends JFrame {
 	PreparedStatement pst;
 	public void Connect() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+			Class.forName(GUtilities.driver);
+			con = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 		} catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(RegisterStudents.this, "Failed to located Class");
 		} catch (SQLException e) {

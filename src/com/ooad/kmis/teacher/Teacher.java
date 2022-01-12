@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import javax.swing.table.TableModel;
 
+import com.ooad.kmis.GUtilities;
 import com.ooad.kmis.User;
 
 public class Teacher implements User{
@@ -37,21 +38,21 @@ public class Teacher implements User{
 		this.subject = subjectsString;
 	}
 	
-	public ResultSet getProfile(Connection connection, PreparedStatement preparedStatement) throws SQLException {
-		preparedStatement = connection.prepareStatement("SELECT * FROM teachers WHERE id = ? and user_name = ?");
-		
-		preparedStatement.setString(1, userId);
-		preparedStatement.setString(2, userName);
-		ResultSet rs = preparedStatement.executeQuery();
-    	return rs;
-	}
+//	public ResultSet getProfile(Connection connection, PreparedStatement preparedStatement) throws SQLException {
+//		preparedStatement = connection.prepareStatement("SELECT * FROM teachers WHERE id = ? and user_name = ?");
+//		
+//		preparedStatement.setString(1, userId);
+//		preparedStatement.setString(2, userName);
+//		ResultSet rs = preparedStatement.executeQuery();
+//    	return rs;
+//	}
 	
 	public ResultSet getProfile() throws SQLException, ClassNotFoundException {
 		Connection con;
 		PreparedStatement preparedStatement;
 
-		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+		Class.forName(GUtilities.driver);
+		con = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 		
 		preparedStatement = con.prepareStatement("SELECT * FROM teachers WHERE id = ? and user_name = ?");
 		
@@ -62,7 +63,13 @@ public class Teacher implements User{
     	return rs;
 	}
 	
-	public int editProfile(Connection connection, PreparedStatement preparedStatement)  throws SQLException {
+	public int editProfile()  throws SQLException, ClassNotFoundException {
+		Connection connection;
+		PreparedStatement preparedStatement;
+
+		Class.forName(GUtilities.driver);
+		connection = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
+		
 		preparedStatement = connection.prepareStatement("UPDATE teachers SET first_name = ?, last_name = ?, subject = ?, user_name =? WHERE id = ?");
 		preparedStatement.setString(1, firstName);
 		preparedStatement.setString(2, lastName);
@@ -78,8 +85,8 @@ public class Teacher implements User{
 		Connection con;
 		PreparedStatement preparedStatement;
 
-		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+		Class.forName(GUtilities.driver);
+		con = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 		
 		preparedStatement = con.prepareStatement("UPDATE teachers SET password = ? WHERE id = ?");
 		preparedStatement.setString(1, newPassword);

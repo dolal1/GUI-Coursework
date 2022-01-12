@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+import com.ooad.kmis.GUtilities;
+
 public class ProfilePage extends JPanel {
 
 	/**
@@ -33,8 +35,8 @@ public class ProfilePage extends JPanel {
 	ResultSet rs;
 	public void Connect() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+			Class.forName(GUtilities.driver);
+			con = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 		} catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(ProfilePage.this, "Failed to locate JDBC Driver");
 		} catch (SQLException e) {

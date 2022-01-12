@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+
+import com.ooad.kmis.GUtilities;
+
 import java.awt.Font;
 
 public class MarksPage extends JPanel {
@@ -29,8 +32,8 @@ public class MarksPage extends JPanel {
 	ResultSet rs;
 	public void Connect() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+			Class.forName(GUtilities.driver);
+			con = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 		} catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(MarksPage.this, "Failed to locate JDBC Driver");
 		} catch (SQLException e) {
@@ -49,46 +52,54 @@ public class MarksPage extends JPanel {
 
 		Calendar cal = Calendar.getInstance();
 		int currentYear = cal.get(Calendar.YEAR);
-		Marks englishMarks = new Marks("English", String.valueOf(currentYear), "1");;
-		Marks mathMarks = new Marks("Mathematics", String.valueOf(currentYear), "1");;
-		Marks sstMarks = new Marks("SocialStudies", String.valueOf(currentYear), "1");;
-		Marks scienceMarks = new Marks("Science", String.valueOf(currentYear), "1");;
+		String currentTerm = "1";
+		
+		Marks englishMarks = new Marks("English", String.valueOf(currentYear), currentTerm);;
+		Marks mathMarks = new Marks("Mathematics", String.valueOf(currentYear), currentTerm);;
+		Marks sstMarks = new Marks("SocialStudies", String.valueOf(currentYear), currentTerm);;
+		Marks scienceMarks = new Marks("Science", String.valueOf(currentYear), currentTerm);;
         
         try {
 			pst = con.prepareStatement("SELECT * FROM english WHERE reg_no = ? and year = ? and term = ?");
 	        pst.setString(1, student.registrationNo);
-	        pst.setString(2, "2021");
-	        pst.setString(3, "1");
+	        pst.setString(2, String.valueOf(currentYear));
+	        pst.setString(3, currentTerm);
 			rs = pst.executeQuery();
-			rs.next();
+			if(rs.next()) {
+				englishMarks = englishMarks.fromResultSet(rs);
+			}
+			
 //			englishMarks.subject = "English";
 //			englishMarks.year = String.format("%s", currentYear);
-//			englishMarks.term = "1";
-			englishMarks = englishMarks.fromResultSet(rs);
+//			englishMarks.term = currentTerm;
 			
 			pst = con.prepareStatement("SELECT * FROM mathematics WHERE reg_no = ? and year = ? and term = ?");
 	        pst.setString(1, student.registrationNo);
-	        pst.setString(2, "2021");
-	        pst.setString(3, "1");
+	        pst.setString(2, String.valueOf(currentYear));
+	        pst.setString(3, currentTerm);
 			rs = pst.executeQuery();
-			rs.next();
-			mathMarks = mathMarks.fromResultSet(rs);
+			if(rs.next()) {
+				mathMarks = mathMarks.fromResultSet(rs);
+			}
 			
 			pst = con.prepareStatement("SELECT * FROM social_studies WHERE reg_no = ? and year = ? and term = ?");
 	        pst.setString(1, student.registrationNo);
-	        pst.setString(2, "2021");
-	        pst.setString(3, "1");
+	        pst.setString(2, String.valueOf(currentYear));
+	        pst.setString(3, currentTerm);
 			rs = pst.executeQuery();
-			rs.next();
-			sstMarks = sstMarks.fromResultSet(rs);
+			if(rs.next()) {
+				sstMarks = sstMarks.fromResultSet(rs);
+			}
 			
 			pst = con.prepareStatement("SELECT * FROM science WHERE reg_no = ? and year = ? and term = ?");
 	        pst.setString(1, student.registrationNo);
-	        pst.setString(2, "2021");
-	        pst.setString(3, "1");
+	        pst.setString(2, String.valueOf(currentYear));
+	        pst.setString(3, currentTerm);
 			rs = pst.executeQuery();
-			rs.next();
-			scienceMarks = scienceMarks.fromResultSet(rs);
+			if(rs.next()) {
+				scienceMarks = scienceMarks.fromResultSet(rs);
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

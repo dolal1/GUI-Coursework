@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTabbedPane;
 
+import com.ooad.kmis.GUtilities;
 
 import javax.swing.JLabel;
 
@@ -39,8 +40,8 @@ public class MarksPage extends JPanel {
 
 	public void Connect() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+			Class.forName(GUtilities.driver);
+			con = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 		} catch (ClassNotFoundException e) {
 			JOptionPane.showMessageDialog(MarksPage.this, "Failed to locate JDBC Driver");
 		} catch (SQLException e) {

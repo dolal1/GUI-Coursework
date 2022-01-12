@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import com.ooad.kmis.GUtilities;
+
 import net.proteanit.sql.DbUtils;
 
 public class TeachersPage extends JPanel {
@@ -34,8 +36,8 @@ public class TeachersPage extends JPanel {
 	private JTable teachersTable;
 	public void Connect() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+			Class.forName(GUtilities.driver);
+			con = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 		} catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(TeachersPage.this, "Failed to locate JDBC Driver");
 		} catch (SQLException e) {

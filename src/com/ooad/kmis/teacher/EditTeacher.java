@@ -8,6 +8,8 @@ import java.util.logging.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import com.ooad.kmis.GUtilities;
+
 
 public class EditTeacher extends JFrame {
 
@@ -41,8 +43,8 @@ public class EditTeacher extends JFrame {
 	PreparedStatement pst;
 	public void Connect() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+			Class.forName(GUtilities.driver);
+			con = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 		} catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(EditTeacher.this, "Failed to located Class");
 		} catch (SQLException e) {

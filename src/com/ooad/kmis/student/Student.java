@@ -10,6 +10,7 @@ import java.util.Date;
 
 import javax.swing.table.TableModel;
 
+import com.ooad.kmis.GUtilities;
 import com.ooad.kmis.User;
 
 public class Student implements User{
@@ -45,22 +46,22 @@ public class Student implements User{
 		this.firstName = resultSet.getString("first_name");
 		this.lastName = resultSet.getString("last_name");
 	}
-	
-	public ResultSet getProfile(Connection connection, PreparedStatement preparedStatement) throws SQLException {
-		preparedStatement = connection.prepareStatement("SELECT * FROM students WHERE reg_no = ? and user_name = ?");
-		
-		preparedStatement.setString(1, registrationNo);
-		preparedStatement.setString(2, userName);
-		ResultSet rs = preparedStatement.executeQuery();
-		return rs;
-	}
+//	
+//	public ResultSet getProfile(Connection connection, PreparedStatement preparedStatement) throws SQLException {
+//		preparedStatement = connection.prepareStatement("SELECT * FROM students WHERE reg_no = ? and user_name = ?");
+//		
+//		preparedStatement.setString(1, registrationNo);
+//		preparedStatement.setString(2, userName);
+//		ResultSet rs = preparedStatement.executeQuery();
+//		return rs;
+//	}
 	
 	public ResultSet getProfile() throws SQLException, ClassNotFoundException {
 		Connection con;
 		PreparedStatement preparedStatement;
 
-		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+		Class.forName(GUtilities.driver);
+		con = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 		
 		preparedStatement = con.prepareStatement("SELECT * FROM students WHERE reg_no = ?");
 		
@@ -70,25 +71,25 @@ public class Student implements User{
 		return rs;
 	}
 	
-	public int editProfile(Connection connection, PreparedStatement preparedStatement)  throws SQLException {
-		preparedStatement = connection.prepareStatement("UPDATE students SET first_name = ?, last_name = ?, date_of_birth = ?, user_name =? WHERE reg_no = ?");
-		preparedStatement.setString(1, firstName);
-		preparedStatement.setString(2, lastName);
-		java.sql.Date sqlDate = new java.sql.Date(dateOfBirth.getTime());
-		preparedStatement.setDate(3, sqlDate);
-		preparedStatement.setString(4, userName);
-		preparedStatement.setString(5, registrationNo);
-		int res = preparedStatement.executeUpdate();
-		preparedStatement.close();
-		return res;
-	}
+//	public int editProfile(Connection connection, PreparedStatement preparedStatement)  throws SQLException {
+//		preparedStatement = connection.prepareStatement("UPDATE students SET first_name = ?, last_name = ?, date_of_birth = ?, user_name =? WHERE reg_no = ?");
+//		preparedStatement.setString(1, firstName);
+//		preparedStatement.setString(2, lastName);
+//		java.sql.Date sqlDate = new java.sql.Date(dateOfBirth.getTime());
+//		preparedStatement.setDate(3, sqlDate);
+//		preparedStatement.setString(4, userName);
+//		preparedStatement.setString(5, registrationNo);
+//		int res = preparedStatement.executeUpdate();
+//		preparedStatement.close();
+//		return res;
+//	}
 	
 	public int editProfile()  throws SQLException, ClassNotFoundException {
 		Connection con;
 		PreparedStatement preparedStatement;
 
-		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+		Class.forName(GUtilities.driver);
+		con = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 		
 		preparedStatement = con.prepareStatement("UPDATE students SET first_name = ?, last_name = ?, date_of_birth = ?, user_name =? WHERE reg_no = ?");
 		preparedStatement.setString(1, firstName);
@@ -106,8 +107,8 @@ public class Student implements User{
 		Connection con;
 		PreparedStatement preparedStatement;
 
-		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+		Class.forName(GUtilities.driver);
+		con = DriverManager.getConnection(GUtilities.connectionUrl, GUtilities.dbUsername, GUtilities.dbPassword);
 		
 		preparedStatement = con.prepareStatement("UPDATE students SET password = ? WHERE reg_no = ?");
 		preparedStatement.setString(1, newPassword);
