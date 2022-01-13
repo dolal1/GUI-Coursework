@@ -28,6 +28,7 @@ public class Teacher implements User{
 		this.userName = userName;
 	}
 	
+	//create a teacher object from result set.
 	public Teacher(ResultSet resultSet) throws SQLException {
 		this.userId = resultSet.getString("id");
 		this.userName = resultSet.getString("user_name");
@@ -101,23 +102,24 @@ public class Teacher implements User{
 		return result;
 	}
 	
-	public Teacher fromResultSet (ResultSet rs) throws SQLException {
-		Teacher teacher = new Teacher();
-		String subjectsString;
-    	if(rs.next()) {
-    		teacher.userId = rs.getString("id");
-    		teacher.userName = rs.getString("user_name");
-    		teacher.firstName = rs.getString("first_name");
-    		teacher.lastName = rs.getString("last_name");
-    		subjectsString = rs.getString("subject");
-//    		subject = subjectsString.split(",");
-    		teacher.subject = subjectsString;
-    		
-    		
-    	}
-    	
-    	return teacher;
-	}
+	//can be created using the constructor
+//	public Teacher fromResultSet (ResultSet rs) throws SQLException {
+//		Teacher teacher = new Teacher();
+//		String subjectsString;
+//    	if(rs.next()) {
+//    		teacher.userId = rs.getString("id");
+//    		teacher.userName = rs.getString("user_name");
+//    		teacher.firstName = rs.getString("first_name");
+//    		teacher.lastName = rs.getString("last_name");
+//    		subjectsString = rs.getString("subject");
+////    		subject = subjectsString.split(",");
+//    		teacher.subject = subjectsString;
+//    		
+//    		
+//    	}
+//    	
+//    	return teacher;
+//	}
 	
 	public Teacher fromTableModel(TableModel tM, int row) {
 		Teacher teacher = new Teacher();

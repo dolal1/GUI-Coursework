@@ -19,8 +19,8 @@ public class StudentDashboard extends JPanel {
         this.setPreferredSize(new Dimension(500, 300));
 	}
 	
-	public StudentDashboard(Student tr) {
-		setTeacher(tr);
+	public StudentDashboard(Student st) {
+		setStudent(st);
         this.setPreferredSize(new Dimension(500, 300));
 	}
 
@@ -34,16 +34,17 @@ public class StudentDashboard extends JPanel {
         });
     }
     
-    public static void launch(Student tr) {
+    //this starts the dashboard from login and sets the value of student.
+    public static void launch(Student st) {
     	main(null);
-    	setTeacher(tr);
+    	setStudent(st);
     }
 
-    public static Student getTeacher() {
+    public static Student getStudent() {
 		return student;
 	}
 
-	public static void setTeacher(Student student) {
+	public static void setStudent(Student student) {
 		StudentDashboard.student = student;
 	}
 
@@ -57,6 +58,9 @@ public class StudentDashboard extends JPanel {
         
         JPanel marksPanel = new MarksPage(student);
         cards.add(MarksPage.name, marksPanel);
+        
+        JPanel timetablePanel = new Timetable(student);
+        cards.add(Timetable.name, timetablePanel);
         
         JPanel control = new DashboardMenu(cards, f, student);
         

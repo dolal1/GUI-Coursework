@@ -92,6 +92,17 @@ public class DashboardMenu extends JPanel {
         });
         btnTeachers.setFont(new Font("Arial Narrow", Font.PLAIN, 13));
         add(btnTeachers);
+        
+        JButton btnTimetable = new JButton("Timetable");
+        btnTimetable.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		CardLayout cl = (CardLayout) cards.getLayout();
+                cl.show(cards, TimetablePage.name);
+        	}
+        });
+        btnTimetable.setPreferredSize(new Dimension(150, 20));
+        btnTimetable.setFont(new Font("Arial Narrow", Font.PLAIN, 13));
+        add(btnTimetable);
 	}
 
 }

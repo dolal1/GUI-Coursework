@@ -16,7 +16,7 @@ public class Marks {
 	public String mot;
 	public String eot;
 	
-	private Marks() {
+	public Marks() {
 		
 	}
 	

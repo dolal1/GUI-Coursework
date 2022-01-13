@@ -58,45 +58,12 @@ public class Dashboard extends JPanel {
 
         JPanel teachersPanel = new TeachersPage();
         cards.add(TeachersPage.name, teachersPanel);
-        
-//        Dashboard marks = new Dashboard();
-//        cards.add("marks", marks);
-//        cards.add(marks);
-//        Dashboard subjectRegister = new Dashboard();
-//        cards.add("subjectRegister", subjectRegister);
-//        cards.add(subjectRegister);
-        
-        
-        
-//        JPanel control = new JPanel();
+
+        JPanel timetablePanel = new TimetablePage();
+        cards.add(TimetablePage.name, timetablePanel);
+ 
         JPanel control = new DashboardMenu(cards, f, teacher);
-//        control.add(new JButton(new AbstractAction("\u22b2Prev") {
-//
-//            /**
-//			 * 
-//			 */
-//			private static final long serialVersionUID = 1L;
-//
-//			@Override
-//            public void actionPerformed(ActionEvent e) {
-//                CardLayout cl = (CardLayout) cards.getLayout();
-//                cl.previous(cards);
-//            }
-//        }));
-//        control.add(new JButton(new AbstractAction("Next\u22b3") {
-//
-//            /**
-//			 * 
-//			 */
-//			private static final long serialVersionUID = 1L;
-//
-//			@Override
-//            public void actionPerformed(ActionEvent e) {
-//                CardLayout cl = (CardLayout) cards.getLayout();
-//                cl.next(cards);
-//            }
-//        }));
-        
+
         f.add(cards, BorderLayout.CENTER);
         f.add(control, BorderLayout.WEST);
 //        f.add(control, BorderLayout.SOUTH);
