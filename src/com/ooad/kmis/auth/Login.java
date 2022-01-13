@@ -134,7 +134,7 @@ public class Login extends JFrame {
 				String password = String.valueOf(txtPassword.getPassword());
 
 				try {
-					// prepared statement
+					// creating prepared statement
 					if (userType.intern() == "Teacher") {
 						pst = con.prepareStatement("SELECT * FROM teachers WHERE user_name = BINARY ? and password = BINARY ?");
 					} else {
