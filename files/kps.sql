@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jan 12, 2022 at 02:32 PM
+-- Generation Time: Jan 13, 2022 at 08:42 AM
 -- Server version: 5.7.34
 -- PHP Version: 7.4.21
 
@@ -36,6 +36,13 @@ CREATE TABLE `english` (
   `MOT` varchar(3) NOT NULL DEFAULT '00',
   `EOT` varchar(3) NOT NULL DEFAULT '00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `english`
+--
+
+INSERT INTO `english` (`reg_no`, `year`, `term`, `class`, `BOT`, `MOT`, `EOT`) VALUES
+('210003', '2022', '1', 'P6', '90', '', '');
 
 -- --------------------------------------------------------
 
@@ -85,6 +92,14 @@ CREATE TABLE `social_studies` (
   `EOT` varchar(3) NOT NULL DEFAULT '00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `social_studies`
+--
+
+INSERT INTO `social_studies` (`reg_no`, `year`, `term`, `class`, `BOT`, `MOT`, `EOT`) VALUES
+('210004', '2022', '1', 'P5', '90', '88', ''),
+('210005', '2022', '1', 'P5', '45', '88', '');
+
 -- --------------------------------------------------------
 
 --
@@ -108,10 +123,9 @@ CREATE TABLE `students` (
 
 INSERT INTO `students` (`reg_no`, `first_name`, `last_name`, `gender`, `date_of_birth`, `class`, `user_name`, `password`) VALUES
 ('210002', 'Tonny', 'Baw', 'M', '2009-12-16', 'P7', 'btonny', 'pass1234'),
-('210003', 'Vien', 'Okoth', 'M', '2007-07-17', 'P6', 'ovien', 'pass1234'),
+('210003', 'Viena', 'Okoth', 'M', '2007-07-17', 'P6', 'ovien', 'pass1234'),
 ('210004', 'David', 'Olal', 'M', '2009-07-08', 'P5', 'odavid', 'pass1234'),
 ('210005', 'Vanessa', 'Awiner', 'F', '2008-08-12', 'P5', 'avanessa', 'pass1234'),
-('210007', 'Oran', 'Tendo', 'F', '2004-05-06', 'P7', 'toran', 'pass1234'),
 ('210008', 'Test', 'P1', 'M', '2014-06-17', 'P1', 'ptest', 'pass1234');
 
 --
@@ -209,9 +223,47 @@ INSERT INTO `teacher_id_seq` (`id`) VALUES
 (7),
 (8);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `timetables`
+--
+
+CREATE TABLE `timetables` (
+  `class` varchar(3) NOT NULL,
+  `day` varchar(50) NOT NULL,
+  `7am_10am` varchar(50) DEFAULT NULL,
+  `11am_1pm` varchar(50) DEFAULT NULL,
+  `2pm_5pm` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `english`
+--
+ALTER TABLE `english`
+  ADD PRIMARY KEY (`reg_no`,`year`,`term`,`class`);
+
+--
+-- Indexes for table `mathematics`
+--
+ALTER TABLE `mathematics`
+  ADD PRIMARY KEY (`reg_no`,`year`,`term`,`class`);
+
+--
+-- Indexes for table `science`
+--
+ALTER TABLE `science`
+  ADD PRIMARY KEY (`reg_no`,`year`,`term`,`class`);
+
+--
+-- Indexes for table `social_studies`
+--
+ALTER TABLE `social_studies`
+  ADD PRIMARY KEY (`reg_no`,`year`,`term`,`class`);
 
 --
 -- Indexes for table `students`
@@ -236,6 +288,12 @@ ALTER TABLE `teachers`
 --
 ALTER TABLE `teacher_id_seq`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `timetables`
+--
+ALTER TABLE `timetables`
+  ADD PRIMARY KEY (`class`,`day`);
 
 --
 -- AUTO_INCREMENT for dumped tables
